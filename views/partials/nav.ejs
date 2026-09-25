@@ -1,0 +1,12 @@
+<ul class="navigation-bar">
+  <% if(locals.user) { %>
+    <li>
+      <form method="post" action="/auth/log-out">
+        <button type="submit">Log out</button>
+      </form>
+    </li>
+    <% } else { %>
+    <li><a href="/auth/sign-up">Sign Up</a></li>
+    <li><a href="/auth/log-in">Log In</a></li>
+  <% } %>
+</ul>
