@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=file.name%></title>
+</head>
+<body>
+    <%-include("partials/nav")%>
+    <h2>Move <%=file.name%></h2>
+
+    <form action="/files/<%=file.id%>/move" method="POST">
+        <label for="folderId">Move to:</label>
+        <select name="folderId" id="folderId">
+            <option value="">-Root (no folder) -</option>
+            <%folderOptions.forEach((f) =>{ %>
+                <option value="<%=f.id%>"><%=f.label%></option>
+            <%})%>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

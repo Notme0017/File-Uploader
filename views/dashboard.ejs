@@ -10,6 +10,7 @@
     <h2>Welcome, <%=locals.user.username%></h2>
     
     <a href="/folders/new">Create New Folder</a>
+    <a href="/files/upload">Upload New File</a>
     <ul class="folder-list">
         <% folders.forEach((folder) =>{%>
             <li>
@@ -19,6 +20,14 @@
                         <span class="time"><%=folder.createdAt.toLocaleDateString()%></span>
                     </div>
                 </a>
+            </li>
+        <%})%>
+    </ul>
+
+    <ul class="file-list">
+        <% files.forEach((file) =>{ %>
+            <li>
+                <%-include("partials/file", {file: file})%>
             </li>
         <%})%>
     </ul>

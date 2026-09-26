@@ -9,6 +9,7 @@ const prisma = require("./lib/prisma");
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
 const folderRouter = require("./routes/folderRouter");
+const fileRouter = require("./routes/fileRouter");
 
 const passport = require("./config/passport");
 
@@ -50,6 +51,7 @@ app.use((req, res, next) =>{
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/folders", folderRouter);
+app.use("/files", fileRouter);
 
 app.use((req, res, next) =>{
   res.status(404).send("Page not found! Idiot")

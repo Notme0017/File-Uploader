@@ -22,6 +22,7 @@ model User {
   password    String        
   createdAt   DateTime      @default(now())
   folders     Folder[]
+  files       File[]
 }
 
 model Folder {
@@ -31,8 +32,24 @@ model Folder {
   userId      Int        
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   parentId    Int?
-  parent      Folder?        @relation("FolderToFolder", fields:[parentId], references: [id], onDelete: Cascade)
-  children    Folder[]       @relation("FolderToFolder")
+  resourceType String?
+  parent      Folder?       @relation("FolderToFolder", fields:[parentId], references: [id], onDelete: Cascade)
+  children    Folder[]      @relation("FolderToFolder")
+  files       File[]
 
   @@index([userId])
+}
+
+model File {
+  id          Int           @id @default(autoincrement())
+  name        String
+  size        Int
+  mimeType    String
+  url         String?
+  publicId    String?
+  uploadedAt  DateTime      @default(now())
+  userId      Int
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  folderId    Int?
+  folder      Folder?       @relation(fields: [folderId], references: [id], onDelete: Cascade)
 }

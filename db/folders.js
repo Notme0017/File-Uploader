@@ -13,6 +13,7 @@ class Folder {
             where: {id, userId},
             include: {
                 children: true,
+                files: true,
             }
         });
     };
@@ -60,6 +61,35 @@ class Folder {
             currentId = folder.parentId;
         }
         return breadCrumbs;
+    }
+
+    async getAllFoldersFlat(userId){
+        return await prisma.folder.findMany({
+            where: {userId: userId},
+            select: {id: true, name: true, parentId: true},
+            orderBy: {name: "asc"},
+        });
+    };
+
+    async getFolderPathLabels(folderId, userId){
+        const breadCrumbs = await this.getBreadCrumbs(folderId, userId);
+        return breadCrumbs.map(f => f.name).join("/");
+    };
+
+    async getAllDescendantFolderIds(folderId, userId){
+        const ids = [folderId];
+
+        const children = await prisma.folder.findMany({
+            where: {parentId: folderId, userId: userId},
+            select: {id: true},
+        });
+
+        for(const child of children){
+            const childIds = await this.getAllDescendantFolderIds(child.id, userId)
+            ids.push(...childIds);
+        };
+
+        return ids;
     }
 }
 
