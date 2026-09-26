@@ -8,6 +8,7 @@ const {PrismaSessionStore} = require("@quixo3/prisma-session-store");
 const prisma = require("./lib/prisma");
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
+const folderRouter = require("./routes/folderRouter");
 
 const passport = require("./config/passport");
 
@@ -24,7 +25,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(
   session({
     cookie: {
-      maxAge: 2 * 60 * 1000 //2 minutes //to be changed later
+      maxAge: 5 * 60 * 60 * 1000 
     },
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -48,6 +49,7 @@ app.use((req, res, next) =>{
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
+app.use("/folders", folderRouter);
 
 app.use((req, res, next) =>{
   res.status(404).send("Page not found! Idiot")

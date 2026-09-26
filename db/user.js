@@ -8,6 +8,11 @@ class User {
     async getUserById(id){
         return prisma.user.findUnique({
             where: { id },
+            select:{
+                id: true,
+                username: true,
+                createdAt: true,
+            }
         });
     };
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<body>
+    <%-include("partials/nav")%>
+    <h2>Welcome, <%=locals.user.username%></h2>
+    
+    <a href="/folders/new">Create New Folder</a>
+    <ul class="folder-list">
+        <% folders.forEach((folder) =>{%>
+            <li>
+                <a href="/folders/<%=folder.id%>">
+                    <div class="folder">
+                        <span class="folder-name"><%=folder.name%></span>
+                        <span class="time"><%=folder.createdAt.toLocaleDateString()%></span>
+                    </div>
+                </a>
+            </li>
+        <%})%>
+    </ul>
+    
+</body>
+</html>

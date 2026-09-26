@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%=title%></title>
+</head>
+<body>
+    <%-include("partials/nav")%>
+
+    <h2><%=title%></h2>
+
+    <%-include("partials/errors")%>
+
+    <form action="/folders/new" method="post">
+        <input type="hidden" name="parentId" value="<%=parentId%>">
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Name" />
+
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>
