@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
+    <%- include("partials/nav") %>
 
-    <h2><%=title%></h2>
+    <div class="page-container">
+        <h2 class="page-title"><%= title %></h2>
 
-    <%-include("partials/errors")%>
+        <%- include("partials/errors") %>
 
-    <form action="/folders/new" method="post">
-        <input type="hidden" name="parentId" value="<%=parentId%>">
+        <form action="/folders/new" method="post" class="form-card">
+            <input type="hidden" name="parentId" value="<%= parentId %>">
 
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="Name" />
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Name" />
+            </div>
 
-        <button type="submit">Create</button>
-    </form>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
 </body>
 </html>

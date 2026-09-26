@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
+    <%- include("partials/nav") %>
 
-    <h2><%=title%></h2>
-    <%-include("partials/errors")%>
+    <div class="page-container">
+        <h2 class="page-title"><%= title %></h2>
 
-    <form method="post" action="/auth/log-in" class="log-in-form">
-        <label for="username">Username</label>
-        <input id="username" value="<%=locals.username ||''%>" type="text" name="username">
+        <%- include("partials/errors") %>
 
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password" />
+        <form method="post" action="/auth/log-in" class="form-card">
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input id="username" value="<%= locals.username || '' %>" type="text" name="username">
+            </div>
 
-        <button type="submit">Log In</button>
-    </form>
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" />
+            </div>
+
+            <button type="submit" class="btn">Log In</button>
+        </form>
+    </div>
 </body>
 </html>

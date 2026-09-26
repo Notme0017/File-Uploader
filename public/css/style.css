@@ -1,0 +1,557 @@
+:root {
+  --color-bg: #FAFAF8;
+  --color-surface: #FFFFFF;
+  --color-text: #1F2421;
+  --color-text-muted: #6B7370;
+  --color-border: #E3E1DB;
+  --color-accent: #0F6E5E;
+  --color-accent-hover: #0C5A4D;
+  --color-danger: #B3261E;
+  --color-danger-hover: #8F1E18;
+
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --radius: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Navigation bar */
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navigation-bar li {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+}
+
+.nav-logout-form {
+  margin: 0;
+}
+
+.nav-logout-btn {
+  background: none;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  padding: 0;
+}
+
+.nav-logout-btn:hover {
+  color: var(--color-danger);
+}
+
+/* Layout wrapper for auth-style pages */
+.page-container {
+  max-width: 420px;
+  margin: var(--space-4) auto;
+  padding: 0 var(--space-3);
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+/* Forms */
+.form-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.form-field input,
+.form-field select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+  border-color: var(--color-accent);
+}
+
+.btn {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: #FFFFFF;
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--color-accent-hover);
+  text-decoration: none;
+}
+
+.btn-danger {
+  background: var(--color-danger);
+}
+
+.btn-danger:hover {
+  background: var(--color-danger-hover);
+}
+
+/* Error messages */
+.error-list {
+  list-style: none;
+  margin: 0 0 var(--space-2) 0;
+  padding: var(--space-2);
+  background: #FBEAE9;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius);
+  color: var(--color-danger);
+  font-size: 0.9rem;
+}
+
+.error-list li + li {
+  margin-top: 0.25rem;
+}
+
+.error-item {
+  list-style: none;
+}
+
+/* File & folder list items */
+.item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.file,
+.folder {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  flex-wrap: wrap;
+}
+
+.file-name,
+.folder-name {
+  font-weight: 500;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+.folder-name::before {
+  content: "📁 ";
+}
+
+.file-name::before {
+  content: "📄 ";
+}
+
+.file-size,
+.time {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: auto;
+}
+
+.item-actions a {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.item-actions form {
+  margin: 0;
+}
+
+.item-actions .btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-danger);
+  font-family: inherit;
+}
+
+.item-actions .btn-link:hover {
+  color: var(--color-danger-hover);
+  text-decoration: underline;
+}
+
+/* Page header with title + primary actions */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  background: var(--color-bg);
+  text-decoration: none;
+  border-color: var(--color-accent);
+}
+
+.section-block + .section-block {
+  margin-top: var(--space-3);
+}
+
+.section-heading {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.empty-state {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  padding: var(--space-2) 0;
+}
+
+/* Remove default underline/link styling on folder card links */
+.folder-link {
+  color: inherit;
+  display: block;
+}
+
+.folder-link:hover {
+  text-decoration: none;
+}
+
+.folder-link:hover .folder {
+  border-color: var(--color-accent);
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.breadcrumbs a {
+  color: var(--color-text-muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--color-accent);
+}
+
+/* Row of secondary action links below a page title */
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.action-row a {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.action-row form {
+  margin: 0;
+}
+
+.action-row .btn-link-danger {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-danger);
+}
+
+.action-row .btn-link-danger:hover {
+  color: var(--color-danger-hover);
+  text-decoration: underline;
+}
+
+/* Key-value detail list (used on file detail page) */
+.detail-list {
+  list-style: none;
+  margin: 0 0 var(--space-3) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.detail-list li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.detail-list strong {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  min-width: 90px;
+}
+
+/* Standalone message pages (expired/not-found, no nav) */
+.message-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-3);
+}
+
+.message-page h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-1);
+}
+
+.message-page p {
+  color: var(--color-text-muted);
+  max-width: 360px;
+}
+
+.message-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-2);
+}
+
+/* Readonly link display with copy affordance */
+.link-display-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.link-display-input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.link-display-input:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 1px;
+}
+
+.copy-btn {
+  flex-shrink: 0;
+}
+
+/* Shared folder public page */
+.shared-header {
+  max-width: 720px;
+  margin: var(--space-4) auto var(--space-3);
+  padding: 0 var(--space-3);
+}
+
+.shared-header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.shared-tree-wrapper {
+  max-width: 720px;
+  margin: 0 auto var(--space-4);
+  padding: 0 var(--space-3);
+}
+
+/* Recursive tree list */
+.tree-list {
+  list-style: none;
+  margin: 0;
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--color-border);
+}
+
+.shared-tree-wrapper > .tree-list {
+  padding-left: 0;
+  border-left: none;
+}
+
+.tree-list li {
+  margin: 0.4rem 0;
+}
+
+.tree-folder-name {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.tree-file {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.4rem 0.6rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.tree-file-name::before {
+  content: "📄 ";
+}
+
+.tree-file a {
+  margin-left: auto;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Inline single-line error message (not a full list) */
+.error-inline {
+  background: #FBEAE9;
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius);
+  padding: var(--space-1) var(--space-2);
+  color: var(--color-danger);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-2);
+}
+
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin: 0.35rem 0 0 0;
+}
+
+/* Landing page */
+.landing {
+  min-height: calc(100vh - 60px); /* account for nav height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-3);
+}
+
+.landing h1 {
+  font-size: 2rem;
+  margin: 0 0 var(--space-1) 0;
+}
+
+.landing p {
+  color: var(--color-text-muted);
+  max-width: 420px;
+  margin-bottom: var(--space-3);
+}
+
+.landing-actions {
+  display: flex;
+  gap: var(--space-2);
+}

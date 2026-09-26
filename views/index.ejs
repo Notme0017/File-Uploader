@@ -3,11 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%=title%></title>
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <h2><%=title%></h2>
-  <h3>This is the index page</h3>
-  <%-include("partials/nav")%>
+  <%- include("partials/nav") %>
+
+  <div class="landing">
+    <h1>Store and share your files, organized your way</h1>
+    <p>Upload files, organize them into folders, and share what you need with a link — no clutter, no fuss.</p>
+
+    <div class="landing-actions">
+      <a href="/auth/sign-up" class="btn">Get Started</a>
+      <a href="/auth/log-in" class="btn btn-secondary">Log In</a>
+    </div>
+  </div>
 </body>
 </html>

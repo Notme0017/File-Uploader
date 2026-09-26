@@ -3,44 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
-    <nav class="breadcrumbs">
-        <a href="/dashboard">Home</a>
-        <% breadcrumbs.forEach((crumb) =>{%>
-            / <a href="/folders/<%=crumb.id%>"><%=crumb.name%></a>
-        <%})%>
-    </nav>
-    <h2><%=folder.name%></h2>
+    <%- include("partials/nav") %>
 
-    <a href="/folders/new?parentId=<%=folder.id%>">New Subfolder</a>
-    <a href="/files/upload?folderId=<%=folder.id%>">Add File</a>
-    <a href="/folders/<%=folder.id%>/rename">Rename</a>
-    <form action="/folders/<%=folder.id%>/delete" method="post">
-        <button type="submit" onclick="return confirm(`Are you sure you want to delete the folder <%=folder.name%> and all it's children files and folders?`)">Delete</button> 
-    </form>
+    <div class="page-container" style="max-width: 720px;">
+        <nav class="breadcrumbs">
+            <a href="/dashboard">Home</a>
+            <% breadcrumbs.forEach((crumb) => { %>
+                / <a href="/folders/<%= crumb.id %>"><%= crumb.name %></a>
+            <% }) %>
+        </nav>
 
-    <ul class="folder-list">
-        <% folder.children.forEach((child) =>{%>
-            <li> 
-                <a href="/folders/<%=child.id%>">
-                    <div class="folder">
-                        <span class="folder-name"><%=child.name%></span>
-                        <span class="time"><%=child.createdAt.toLocaleDateString()%></span>
-                    </div>
-                </a>
-            </li>
-        <%})%>
-    </ul>
+        <h2 class="page-title"><%= folder.name %></h2>
 
-    <ul class="file-list">
-        <% folder.files.forEach((file) =>{%>
-            <li>
-                <%-include("partials/file", {file: file})%>
-            </li>
-        <%})%>
-    </ul>
+        <div class="action-row">
+            <a href="/folders/<%= folder.id %>/share">Share this folder</a>
+            <a href="/folders/new?parentId=<%= folder.id %>">New Subfolder</a>
+            <a href="/files/upload?folderId=<%= folder.id %>">Add File</a>
+            <a href="/folders/<%= folder.id %>/rename">Rename</a>
+            <form action="/folders/<%= folder.id %>/delete" method="post">
+                <button type="submit" class="btn-link-danger" onclick="return confirm(`Are you sure you want to delete the folder <%= folder.name %> and all its children files and folders?`)">Delete</button>
+            </form>
+        </div>
+
+        <div class="section-block">
+            <p class="section-heading">Subfolders</p>
+            <% if (folder.children.length === 0) { %>
+                <p class="empty-state">No subfolders.</p>
+            <% } else { %>
+                <ul class="item-list">
+                    <% folder.children.forEach((child) => { %>
+                        <li>
+                            <a href="/folders/<%= child.id %>" class="folder-link">
+                                <div class="folder">
+                                    <span class="folder-name"><%= child.name %></span>
+                                    <span class="time"><%= child.createdAt.toLocaleDateString() %></span>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
+
+        <div class="section-block">
+            <p class="section-heading">Files</p>
+            <% if (folder.files.length === 0) { %>
+                <p class="empty-state">No files in this folder.</p>
+            <% } else { %>
+                <ul class="item-list">
+                    <% folder.files.forEach((file) => { %>
+                        <li>
+                            <%- include("partials/file", { file: file }) %>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

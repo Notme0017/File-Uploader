@@ -32,10 +32,10 @@ model Folder {
   userId      Int        
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   parentId    Int?
-  resourceType String?
   parent      Folder?       @relation("FolderToFolder", fields:[parentId], references: [id], onDelete: Cascade)
   children    Folder[]      @relation("FolderToFolder")
   files       File[]
+  sharedLinks SharedLink[]
 
   @@index([userId])
 }
@@ -47,9 +47,18 @@ model File {
   mimeType    String
   url         String?
   publicId    String?
+  resourceType String?
   uploadedAt  DateTime      @default(now())
   userId      Int
   user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   folderId    Int?
   folder      Folder?       @relation(fields: [folderId], references: [id], onDelete: Cascade)
+}
+
+model SharedLink {
+  id          String        @id @default(uuid())
+  folderId    Int
+  folder      Folder        @relation(fields: [folderId], references: [id], onDelete: Cascade)
+  expiresAt   DateTime
+  createdAt   DateTime      @default(now())
 }

@@ -3,34 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
-    <h2>Welcome, <%=locals.user.username%></h2>
-    
-    <a href="/folders/new">Create New Folder</a>
-    <a href="/files/upload">Upload New File</a>
-    <ul class="folder-list">
-        <% folders.forEach((folder) =>{%>
-            <li>
-                <a href="/folders/<%=folder.id%>">
-                    <div class="folder">
-                        <span class="folder-name"><%=folder.name%></span>
-                        <span class="time"><%=folder.createdAt.toLocaleDateString()%></span>
-                    </div>
-                </a>
-            </li>
-        <%})%>
-    </ul>
+    <%- include("partials/nav") %>
 
-    <ul class="file-list">
-        <% files.forEach((file) =>{ %>
-            <li>
-                <%-include("partials/file", {file: file})%>
-            </li>
-        <%})%>
-    </ul>
-    
+    <div class="page-container" style="max-width: 720px;">
+        <div class="page-header">
+            <h2>Welcome, <%= locals.user.username %></h2>
+            <div class="header-actions">
+                <a href="/folders/new" class="btn btn-secondary">+ New Folder</a>
+                <a href="/files/upload" class="btn">+ Upload File</a>
+            </div>
+        </div>
+
+        <div class="section-block">
+            <p class="section-heading">Folders</p>
+            <% if (folders.length === 0) { %>
+                <p class="empty-state">No folders yet.</p>
+            <% } else { %>
+                <ul class="item-list">
+                    <% folders.forEach((folder) => { %>
+                        <li>
+                            <a href="/folders/<%= folder.id %>" class="folder-link">
+                                <div class="folder">
+                                    <span class="folder-name"><%= folder.name %></span>
+                                    <span class="time"><%= folder.createdAt.toLocaleDateString() %></span>
+                                </div>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
+
+        <div class="section-block">
+            <p class="section-heading">Files</p>
+            <% if (files.length === 0) { %>
+                <p class="empty-state">No files yet.</p>
+            <% } else { %>
+                <ul class="item-list">
+                    <% files.forEach((file) => { %>
+                        <li>
+                            <%- include("partials/file", { file: file }) %>
+                        </li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div>
+    </div>
 </body>
 </html>

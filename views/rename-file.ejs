@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=file.name%></title>
+    <title><%= file.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
+    <%- include("partials/nav") %>
 
-    <h2>Rename "<%=file.name%></h2>
+    <div class="page-container">
+        <h2 class="page-title">Rename "<%= file.name %>"</h2>
 
-    <%-include("partials/errors")%>
+        <%- include("partials/errors") %>
 
-    <form action="/files/<%=file.id%>/rename" method="post">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="<%=file.name||''%>" />
+        <form action="/files/<%= file.id %>/rename" method="post" class="form-card">
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" value="<%= file.name || '' %>" />
+            </div>
 
-        <button type="submit">Confirm</button>
-    </form>
+            <button type="submit" class="btn">Confirm</button>
+        </form>
+    </div>
 </body>
 </html>

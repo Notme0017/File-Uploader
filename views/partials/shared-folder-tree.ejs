@@ -1,0 +1,17 @@
+<ul class="tree-list">
+    <% folder.files.forEach((file) => { %>
+        <li>
+            <div class="tree-file">
+                <span class="tree-file-name"><%= file.name %></span>
+                <a href="/share/<%= shareId %>/download/<%= file.id %>">Download</a>
+            </div>
+        </li>
+    <% }) %>
+
+    <% folder.children.forEach((child) => { %>
+        <li>
+            <span class="tree-folder-name">📁 <%= child.name %></span>
+            <%- include("shared-folder-tree.ejs", { folder: child, shareId }) %>
+        </li>
+    <% }) %>
+</ul>

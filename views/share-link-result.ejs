@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Link</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include("partials/nav") %>
+
+    <div class="page-container">
+        <h2 class="page-title">Share Link Created</h2>
+        <p>Anyone with this link can view and download the folder's contents until it expires:</p>
+
+        <div class="link-display-group">
+            <input type="text" class="link-display-input" value="<%= shareUrl %>" readonly onclick="this.select()" id="share-url">
+            <button type="button" class="btn copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('share-url').value)">Copy</button>
+        </div>
+    </div>
+</body>
+</html>

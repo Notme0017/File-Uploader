@@ -1,12 +1,14 @@
 <ul class="navigation-bar">
-  <% if(locals.user) { %>
+  <li><a href="/dashboard" class="nav-link">Home</a></li>
+
+  <% if (locals.user) { %>
     <li>
-      <form method="post" action="/auth/log-out">
-        <button type="submit">Log out</button>
+      <form method="post" action="/auth/log-out" class="nav-logout-form">
+        <button type="submit" class="nav-logout-btn">Log out</button>
       </form>
     </li>
-    <% } else { %>
-    <li><a href="/auth/sign-up">Sign Up</a></li>
-    <li><a href="/auth/log-in">Log In</a></li>
+  <% } else { %>
+    <li><a href="/auth/sign-up" class="nav-link">Sign Up</a></li>
+    <li><a href="/auth/log-in" class="nav-link">Log In</a></li>
   <% } %>
 </ul>

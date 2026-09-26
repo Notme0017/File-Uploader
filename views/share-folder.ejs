@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Folder</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include("partials/nav") %>
+
+    <div class="page-container">
+        <h2 class="page-title">Share "<%= folder.name %>"</h2>
+
+        <form action="/folders/<%= folder.id %>/share" method="post" class="form-card">
+            <div class="form-field">
+                <label for="duration">Link expires in:</label>
+                <select name="duration" id="duration">
+                    <option value="86400000">1 day</option>
+                    <option value="604800000">7 days</option>
+                    <option value="2592000000">30 days</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Generate Link</button>
+        </form>
+    </div>
+</body>
+</html>

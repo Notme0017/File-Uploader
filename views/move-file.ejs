@@ -3,22 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=file.name%></title>
+    <title><%= file.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
-    <h2>Move <%=file.name%></h2>
+    <%- include("partials/nav") %>
 
-    <form action="/files/<%=file.id%>/move" method="POST">
-        <label for="folderId">Move to:</label>
-        <select name="folderId" id="folderId">
-            <option value="">-Root (no folder) -</option>
-            <%folderOptions.forEach((f) =>{ %>
-                <option value="<%=f.id%>"><%=f.label%></option>
-            <%})%>
-        </select>
+    <div class="page-container">
+        <h2 class="page-title">Move <%= file.name %></h2>
 
-        <button type="submit">Submit</button>
-    </form>
+        <form action="/files/<%= file.id %>/move" method="POST" class="form-card">
+            <div class="form-field">
+                <label for="folderId">Move to:</label>
+                <select name="folderId" id="folderId">
+                    <option value="">— Root (no folder) —</option>
+                    <% folderOptions.forEach((f) => { %>
+                        <option value="<%= f.id %>"><%= f.label %></option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
 </body>
 </html>

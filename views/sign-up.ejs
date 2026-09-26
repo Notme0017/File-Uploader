@@ -3,26 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=title%></title>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav") %>
+    <%- include("partials/nav") %>
 
-    <h2><%=title%></h2>
+    <div class="page-container">
+        <h2 class="page-title"><%= title %></h2>
 
-    <%-include("partials/errors")%>
+        <%- include("partials/errors") %>
 
-    <form method="post" action="/auth/sign-up" class="sign-up-form">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Username" value="<%=locals.username || ''%>" />
+        <form method="post" action="/auth/sign-up" class="form-card">
+            <div class="form-field">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Username" value="<%= locals.username || '' %>" />
+            </div>
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" />
+            <div class="form-field">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" />
+            </div>
 
-        <label for="confirmpassword">Confirm Password</label>
-        <input type="password" name="confirmpassword" id="confirmpassword" />
+            <div class="form-field">
+                <label for="confirmpassword">Confirm Password</label>
+                <input type="password" name="confirmpassword" id="confirmpassword" />
+            </div>
 
-        <button type="submit">Sign Up</button>
-    </form>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+    </div>
 </body>
 </html>

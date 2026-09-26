@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%title%></title>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <%-include("partials/nav")%>
-    <h2>Rename, <%=folder.name%></h2>
+    <%- include("partials/nav") %>
 
-    <%-include("partials/errors")%>
-    <form action="/folders/<%=folder.id%>/rename" method="post" class="rename-folder-form">
-        <label for="name">Name</label>
-        <input type="text" name="name" value="<%folder.name|| ''%>" id="name" />
+    <div class="page-container">
+        <h2 class="page-title">Rename "<%= folder.name %>"</h2>
 
-        <button type="submit">Rename</button>
-    </form>
+        <%- include("partials/errors") %>
+
+        <form action="/folders/<%= folder.id %>/rename" method="post" class="form-card">
+            <div class="form-field">
+                <label for="name">Name</label>
+                <input type="text" name="name" value="<%= folder.name || '' %>" id="name" />
+            </div>
+
+            <button type="submit" class="btn">Rename</button>
+        </form>
+    </div>
 </body>
 </html>
