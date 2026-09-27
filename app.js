@@ -24,10 +24,13 @@ app.set("view engine", "ejs");
 
 app.use(express.urlencoded({extended: true}));
 
+app.set("trust proxy", 1);
+
 app.use(
   session({
     cookie: {
-      maxAge: 5 * 60 * 60 * 1000 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      secure: process.env.NODE_ENV === "production",
     },
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -63,7 +66,7 @@ app.use((err, req, res, next) =>{
   res.status(err.statusCode || 500).send(err.message || "Something went wrong!");
 });
 
-const PORT = 8080;
+const PORT = process.env.PORT||8080;
 app.listen(PORT, (err) =>{
   if(err) throw err;
   console.log("Express listening on port: 8080!");
